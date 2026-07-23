@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super QTE Soccer 1v1 - Roguelike Edition</title>
+    <title>Super Soccer 1v1 - Roguelike Edition</title>
     <style>
         * {
             box-sizing: border-box;
@@ -75,14 +75,14 @@
             <span>Andar: <b>A / D</b> | Pular: <b>W</b> | Chutar: <b>R</b></span>
             <span>Chute colocado: <span class="skill-key">E</span></span>
             <span>Ativar Habilidade: <span class="skill-key">Q</span></span>
-            <span>Menu: <b>A/D</b> muda, <b>W</b> confirma (ou Mouse)</span>
+            <span>Menu: <b>A/D</b> muda, <b>W</b> confirma </span>
         </div>
         <div class="player-guide">
             <span class="p2-color" id="p2-label">Jogador 2 / IA:</span>
             <span>Andar: <b>← / →</b> | Pular: <b>↑</b> | Chutar: <b>M</b></span>
             <span>Chute colocado: <span class="skill-key">K</span></span>
             <span>Ativar Habilidade: <span class="skill-key">N</span></span>
-            <span>Menu: <b>←/→</b> muda, <b>↑</b> confirma (ou Mouse)</span>
+            <span>Menu: <b>←/→</b> muda, <b>↑</b> confirma </span>
         </div>
     </div>
 
@@ -476,7 +476,7 @@ const ALL_SKILLS = [
     { id: 'blackhole', name: 'Buraco Negro', desc: 'Vórtice que suga inimigos e limpa itens do mapa.', cd: 19, duration: 200, color: '#2f3542' },
     { id: 'clone', name: 'Multiplicador', desc: 'Gera clones copiadores no gol.', cd: 32, duration: 0, color: '#4cd137' },
     { id: 'icewall', name: 'Parede Glacial', desc: 'Cria parede de gelo destrutível colada ao gol.', cd: 32, duration: 1200, color: '#74b9ff' },
-    { id: 'ballmagnet', name: 'Imã da Bola', desc: 'A bola corre até você rapidamente, intangível.', cd: 12, duration: 90, color: '#a29bfe' },
+    { id: 'ballmagnet', name: 'Imã da Bola', desc: 'A bola corre até você rapidamente, intangível.', cd: 10, duration: 90, color: '#a29bfe' },
     { id: 'ghost', name: 'Modo Fantasma', desc: 'Fica intangível por 2s e atravessa tudo.', cd: 8, duration: 120, color: '#b2bec3' },
     { id: 'flow', name: 'Flow', desc: 'Bônus passivo que aumenta a cada gol marcado.', cd: 24, duration: 0, color: '#b05cff' }
 ];
@@ -1015,7 +1015,7 @@ function updateAI() {
 function spawnItem() {
     const types = ['banana', 'tnt', 'boot', 'drink', 'trampoline', 'hourglass', 'bubble'];
     const type = types[Math.floor(Math.random() * types.length)];
-    const lifespan = (type === 'tnt' || type === 'trampoline') ? 20 * 60 : 5 * 60; // Despawn de itens do chão
+    const lifespan = (type === 'tnt' || type === 'trampoline') ? 20 * 60 : 10 * 60; // Despawn de itens do chão
     if (type === 'trampoline') items.push({ x: 100 + Math.random() * 800, y: 450 - 18, vy: 0, type, radius: 18, pulse: 0, static: true, jumpCount: 0, rearmTimer: 0, lifespan });
     else items.push({ x: 100 + Math.random() * 800, y: -20, vy: 2, type, radius: 18, pulse: 0, static: false, lifespan });
 }
@@ -1059,7 +1059,7 @@ function updateItems() {
 
 function applyItemEffect(ent, type, itemX, itemY) {
     if ((type === 'banana' || type === 'tnt') && consumeBubbleShield(ent, itemX, itemY)) return;
-    if (type === 'banana') { ent.slipTimer = 120; applyFatigue(ent, 1, 300); }
+    if (type === 'banana') { ent.slipTimer = 90; applyFatigue(ent, 1, 300); }
     else if (type === 'drink') { ent.drinkTimer = 420; }
     else if (type === 'boot') { ent.bootTimer = 720; }
     else if (type === 'hourglass') { ent.cooldownTimer = 0; ent.aiQueuedSkillDelay = 0; ent.aiQueuedSkillId = ""; }
